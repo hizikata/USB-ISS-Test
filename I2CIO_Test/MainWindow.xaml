@@ -1,0 +1,65 @@
+﻿<Window x:Class="I2CIO_Test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:I2CIO_Test" Loaded="Window_Loaded"
+        mc:Ignorable="d" Background="LightGray" Closed="Window_Closed"
+        Title="I2C读写测试" Height="532.759" Width="841.379">
+    <StackPanel>
+        <GroupBox Header="Keithley设备控制">
+            <StackPanel Margin="5">
+                <StackPanel Margin="5" Orientation="Horizontal">
+                    <TextBlock Text="设备地址:"/>
+                    <TextBox x:Name="tbInstrumentAdd" />
+                    <TextBlock Text="电压:"/>
+                    <TextBox x:Name="tbVoltage"/>
+                    <TextBlock Text="电流:"/>
+                    <TextBox x:Name="tbCurrent"/>
+                    <Button x:Name="btnOpen" Content="开启" />
+                    <Button x:Name="btnClose" Content="关闭"/>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <TextBlock Text="显示结果:"/>
+                    <TextBox Margin="0,5" HorizontalAlignment="Left" Width="450" Height="45"/>
+                </StackPanel>
+
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="通用设备控制">
+            <StackPanel Margin="5">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBox MinWidth="160"/>
+                    <Button Content="_Send command"/>
+                    <Button Content="_Read Command"/>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <TextBlock Text="显示结果:"/>
+                    <TextBox Margin="0,5" HorizontalAlignment="Left" Width="450" Height="45"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="COM选择:"/>
+            <ComboBox x:Name="cmbCom" Width="120"/>
+            <Button x:Name="btnCom" Content="初始化" Click="btnCom_Click"/>
+        </StackPanel>
+        <GroupBox Header="数据读取" Margin="5">
+            <StackPanel Margin="5">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="读取位置:"/>
+                    <ComboBox x:Name="cmbReadAdd" Width="100"/>
+                    <TextBlock Text="开始位置:" Margin="10,0"/>
+                    <TextBox x:Name="tbStartAdd" KeyUp="tbStartAdd_KeyUp"/>
+                    <TextBlock Text="读取字节数:"/>
+                    <TextBox x:Name="tbReadCount" KeyUp="tbReadCount_KeyUp"/>
+                    <Button x:Name="btnRead" Content="读取" Click="btnRead_Click"/>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <TextBlock Text="显示结果"/>
+                    <TextBox x:Name="tbDisplay" Margin="5,10" Height="200" MinWidth="300" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+    </StackPanel>
+</Window>
