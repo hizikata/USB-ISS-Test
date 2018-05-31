@@ -29,6 +29,10 @@ namespace I2CIO_Test
         TransmitBase Tb = new TransmitBase();
         string[] StrReadAdd = { "A2H", "A0H" };
         byte[] SerBuf = new byte[200];
+        #region Keithley
+        byte[] InstrAdd = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30 };
+        string KeyVol, KeyCur;
+        #endregion
         #endregion
         /// <summary>
         /// 主窗体构造函数
@@ -43,6 +47,8 @@ namespace I2CIO_Test
             string[] strCom = SerialPort.GetPortNames();
             cmbCom.ItemsSource = strCom;
             cmbReadAdd.ItemsSource = StrReadAdd;
+            this.btnClose.IsEnabled = false;
+            cmbInstrumentAdd.ItemsSource = InstrAdd;
         }
 
         private void btnCom_Click(object sender, RoutedEventArgs e)
@@ -145,6 +151,16 @@ namespace I2CIO_Test
             {
                 this.btnRead.Focus();
             }
+        }
+
+        private void btnOpen_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

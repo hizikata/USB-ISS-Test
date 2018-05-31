@@ -5,28 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:I2CIO_Test" Loaded="Window_Loaded"
         mc:Ignorable="d" Background="LightGray" Closed="Window_Closed"
-        Title="I2C读写测试" Height="532.759" Width="841.379">
+        Title="I2C读写测试" Height="697.115" Width="895.688">
     <StackPanel>
-        <GroupBox Header="Keithley设备控制">
+        <GroupBox Header="Keithley设备控制" Margin="5">
             <StackPanel Margin="5">
                 <StackPanel Margin="5" Orientation="Horizontal">
                     <TextBlock Text="设备地址:"/>
-                    <TextBox x:Name="tbInstrumentAdd" />
+                    <ComboBox x:Name="cmbInstrumentAdd" Width="60"/>
                     <TextBlock Text="电压:"/>
                     <TextBox x:Name="tbVoltage"/>
                     <TextBlock Text="电流:"/>
                     <TextBox x:Name="tbCurrent"/>
-                    <Button x:Name="btnOpen" Content="开启" />
-                    <Button x:Name="btnClose" Content="关闭"/>
+                    <Button x:Name="btnOpen" Content="开启" Click="btnOpen_Click"/>
+                    <Button x:Name="btnClose" Content="关闭" Click="btnClose_Click"/>
                 </StackPanel>
                 <StackPanel Margin="5">
                     <TextBlock Text="显示结果:"/>
-                    <TextBox Margin="0,5" HorizontalAlignment="Left" Width="450" Height="45"/>
+                    <TextBox x:Name="tbKeithInfo" Margin="0,5" HorizontalAlignment="Left" 
+                             Width="450" Height="45" IsHitTestVisible="False"/>
                 </StackPanel>
 
             </StackPanel>
         </GroupBox>
-        <GroupBox Header="通用设备控制">
+        <GroupBox Header="通用设备控制" Margin="5">
             <StackPanel Margin="5">
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBox MinWidth="160"/>
@@ -35,7 +36,8 @@
                 </StackPanel>
                 <StackPanel Margin="5">
                     <TextBlock Text="显示结果:"/>
-                    <TextBox Margin="0,5" HorizontalAlignment="Left" Width="450" Height="45"/>
+                    <TextBox Margin="0,5" HorizontalAlignment="Left" Width="450" Height="45"
+                             IsHitTestVisible="False"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>
@@ -57,7 +59,8 @@
                 </StackPanel>
                 <StackPanel Margin="5">
                     <TextBlock Text="显示结果"/>
-                    <TextBox x:Name="tbDisplay" Margin="5,10" Height="200" MinWidth="300" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="tbDisplay" Margin="5,10,0,10" Height="200" MinWidth="300" 
+                             HorizontalAlignment="Left" IsHitTestVisible="False" Width="396"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>
