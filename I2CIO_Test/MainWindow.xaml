@@ -11,7 +11,7 @@
             <StackPanel Margin="5">
                 <StackPanel Margin="5" Orientation="Horizontal">
                     <TextBlock Text="设备地址:"/>
-                    <ComboBox x:Name="cmbInstrumentAdd" Width="60"/>
+                    <ComboBox x:Name="cmbInstrumentAdd" Width="60" SelectionChanged="cmbInstrumentAdd_Selected"/>
                     <TextBlock Text="电压:"/>
                     <TextBox x:Name="tbVoltage"/>
                     <TextBlock Text="电流:"/>
@@ -30,24 +30,26 @@
         <GroupBox Header="通用设备控制" Margin="5">
             <StackPanel Margin="5">
                 <StackPanel Orientation="Horizontal" Margin="5">
-                    <TextBox MinWidth="160"/>
-                    <Button Content="_Send command"/>
-                    <Button Content="_Read Command"/>
+                    <TextBox x:Name="tbCommand" MinWidth="160"/>
+                    <Button x:Name="btnSendCommand" Content="_Send command" Click="btnSendCommand_Click"/>
+                    <Button x:Name="btnReadCommand" Content="_Read Command" Click="btnReadCommand_Click"/>
                 </StackPanel>
                 <StackPanel Margin="5">
                     <TextBlock Text="显示结果:"/>
-                    <TextBox Margin="0,5" HorizontalAlignment="Left" Width="450" Height="45"
+                    <TextBox x:Name="tbCommonResult" Margin="0,5" HorizontalAlignment="Left" Width="450" Height="45"
                              IsHitTestVisible="False"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>
-        <StackPanel Orientation="Horizontal" Margin="5">
-            <TextBlock Text="COM选择:"/>
-            <ComboBox x:Name="cmbCom" Width="120"/>
-            <Button x:Name="btnCom" Content="初始化" Click="btnCom_Click"/>
-        </StackPanel>
-        <GroupBox Header="数据读取" Margin="5">
+
+        <GroupBox Header="I2C数据读取" Margin="5">
+            
             <StackPanel Margin="5">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="COM选择:"/>
+                    <ComboBox x:Name="cmbCom" Width="120"/>
+                    <Button x:Name="btnCom" Content="初始化" Click="btnCom_Click"/>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="读取位置:"/>
                     <ComboBox x:Name="cmbReadAdd" Width="100"/>

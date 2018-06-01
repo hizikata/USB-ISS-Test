@@ -69,6 +69,7 @@ namespace I2CIO_Test.Methods
         /// </summary>
         /// <param name="serBuf">要写入的byte 数组</param>
         /// <param name="write_bytes">数组的长度</param>
+        /// <param name="USB_ISS">通信串口</param>
         private void iss_transmit(byte[] serBuf, byte write_bytes, SerialPort USB_ISS)
         {
             try
@@ -110,6 +111,7 @@ namespace I2CIO_Test.Methods
         /// <param name="SerBuf">指定字节数组</param>
         /// <param name="port">通信COM口</param>
         /// <param name="count">要读取的字节数</param>
+        /// <param name="add">读取的开始地址</param>
         /// <returns></returns>
         public string MyI2C_ReadA2HByte(byte[] SerBuf, SerialPort port,byte add,byte count)  
         {
