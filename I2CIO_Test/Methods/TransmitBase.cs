@@ -113,7 +113,7 @@ namespace I2CIO_Test.Methods
         /// <param name="count">要读取的字节数</param>
         /// <param name="add">读取的开始地址</param>
         /// <returns></returns>
-        public string MyI2C_ReadA2HByte(byte[] SerBuf, SerialPort port,byte add,byte count)  
+        public List<byte> MyI2C_ReadA2HByte(byte[] SerBuf, SerialPort port,byte add,byte count)  
         {
             #region 密码解锁
             //密码写入，都不变
@@ -135,6 +135,8 @@ namespace I2CIO_Test.Methods
             iss_transmit(SerBuf, 5, port);
             iss_recieve(SerBuf, 1, port);
             #endregion
+            #region 读取数据
+            List<byte> data = new List<byte>();
             //读到A2 176位,读取两个字节的高低位温度，温度值 =((HEX2DEC(A2)*187.4/65536-53.7)+40)/2，单位度 
             SerBuf[0] = (byte)IssCmds.I2C_AD1;  //  Read/Write 1 byte addressed devices (the majority of devices will use this one)
             SerBuf[1] = 0xa3;  //选择A2H区域                  //  I2C address of EEPROM for reading，I2C数据区块，0xa1为Read A0; 0xa3为Read A2;0xb1为Read B0; 0xb3为Read B2;
@@ -146,12 +148,9 @@ namespace I2CIO_Test.Methods
             StringBuilder sb = new StringBuilder(20);
             for (int i = 0; i < count; i++)      //   i 的长度应该为iss_recieve里的read_bytes的长度
             {
-                string dddd = string.Empty;
-                //每八个字节换行
-                if ((i + 1) % 8 == 0 && i != 0) dddd = "\r\n";
-                sb = sb.Append(string.Format("{0:X2} {1}", SerBuf[i], dddd));
+                data.Add(SerBuf[i]);
             }
-
+            #endregion
             #region 密码上锁
             //密码保存，都不变
             SerBuf[0] = (byte)IssCmds.I2C_AD1;
@@ -161,7 +160,7 @@ namespace I2CIO_Test.Methods
             SerBuf[4] = 0x00;                   // The data bytes
             iss_transmit(SerBuf, 5, port);
             iss_recieve(SerBuf, 1, port);
-            return sb.ToString();
+            return data;
             #endregion
           
         }

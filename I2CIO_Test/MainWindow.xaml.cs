@@ -76,7 +76,7 @@ namespace I2CIO_Test
                     Port.WriteTimeout = 100;
 
                     Port.Open();
-                    string msg = Tb.IsPortReady(Port, SerBuf)+DateTime.Now.ToShortTimeString();
+                    string msg = Tb.IsPortReady(Port, SerBuf) + DateTime.Now.ToShortTimeString();
                     if (msg == null)
                         tbDisplay.Text = "串口初始化失败";
                     else
@@ -107,18 +107,38 @@ namespace I2CIO_Test
                 }
                 else
                 {
+                    StringBuilder sb = new StringBuilder();
+                    List<byte> data = new List<byte>();
                     byte startAdd, readCount;
                     switch (cmbReadAdd.SelectedItem.ToString())
                     {
                         case "A0H":
                             startAdd = Convert.ToByte(tbStartAdd.Text.Trim());
                             readCount = Convert.ToByte(tbReadCount.Text.Trim());
-                            tbDisplay.Text = Tb.MyI2C_ReadA0HByte(SerBuf, Port, startAdd, readCount);
+                            data = Tb.MyI2C_ReadA2HByte(SerBuf, Port, startAdd, readCount);
+                            for (int i = 0; i < data.Count; i++)
+                            {
+                                string dddd = string.Empty;
+                                //每八个字节换行
+                                if ((i + 1) % 8 == 0 && i != 0) dddd = "\r\n";
+                                sb = sb.Append(string.Format("{0:X2} {1}", data[i], dddd));
+                            }
+                            tbDisplay.Text = sb.ToString();
                             break;
                         case "A2H":
                             startAdd = Convert.ToByte(tbStartAdd.Text.Trim());
                             readCount = Convert.ToByte(tbReadCount.Text.Trim());
-                            tbDisplay.Text = Tb.MyI2C_ReadA2HByte(SerBuf, Port, startAdd, readCount);
+
+                            data = Tb.MyI2C_ReadA2HByte(SerBuf, Port, startAdd, readCount);
+                            for (int i = 0; i < data.Count; i++)
+                            {
+                                string dddd = string.Empty;
+                                //每八个字节换行
+                                if ((i + 1) % 8 == 0 && i != 0) dddd = "\r\n";
+                                sb = sb.Append(string.Format("{0:X2} {1}", data[i], dddd));
+                            }
+                            tbDisplay.Text = sb.ToString();
+
                             break;
                         default:
                             break;
@@ -257,6 +277,49 @@ namespace I2CIO_Test
             }
         }
 
+        private void btnCalculate_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (Port == null || Port.IsOpen == false)
+                {
+                    MessageBox.Show("请先初始化COM口", "系统提示");
+                }
+                else
+                {
+                    //温度计算 96，97
+                    double temp, vcc, txPower, rxPower, bais;
+                    short cache = 0;
+                    ushort ucache = 0;
+                    List<byte> data = Tb.MyI2C_ReadA2HByte(SerBuf, Port, 96, 10);
+                    cache = DigitTransform(data[0], data[1]);
+                    temp = (double)cache / 256;
+                    tbTemp.Text = temp.ToString() + "℃";
+                    //Vcc 98，99
+                    ucache = UDigitTransform(data[2], data[3]);
+                    vcc = (double)ucache / 10000; //V
+                    tbVcc.Text = vcc.ToString() + "V";
+
+                    //Bais 100,101
+                    ucache = UDigitTransform(data[4], data[5]);
+                    bais = (double)ucache  /500;
+                    tbBais.Text = bais.ToString() + "mA";
+                    //TxPower 102,103
+                    ucache = UDigitTransform(data[6], data[7]);
+                    txPower = (double)ucache / 10000; //mW
+                    tbTxPower.Text = (Math.Log10(txPower) * 10).ToString() + "dBm";
+                    //RxPower 104,105
+                    ucache = UDigitTransform(data[8], data[9]);
+                    rxPower = (double)ucache / 10000; //mW
+                    tbRx10.Text = (Math.Log10(rxPower) * 10).ToString() + "dBm";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "系统提示");
+            }
+        }
+
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Status = visa32.viPrintf(Vi, ":OUTP OFF\n");
@@ -273,5 +336,24 @@ namespace I2CIO_Test
             }
         }
         #endregion
+        #region Methods
+        /// <summary>
+        /// 16位二进制转换为原码
+        /// </summary>
+        /// <param name="msb">高八位</param>
+        /// <param name="lsb">低八位</param>
+        /// <returns></returns>
+        short DigitTransform(byte msb, byte lsb)
+        {
+            short num = (short)((short)msb * 256 + (short)lsb);
+            return num;
+        }
+        ushort UDigitTransform(byte msb,byte lsb)
+        {
+            ushort num = (ushort)((ushort)msb * 256 + (ushort)lsb);
+            return num;
+        }
     }
+    #endregion
+
 }
