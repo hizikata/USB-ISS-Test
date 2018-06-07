@@ -233,7 +233,7 @@ namespace I2CIO_Test
                         visa32.VI_NO_LOCK, visa32.VI_TMO_IMMEDIATE, out Vi);
                     CheckStatus(Vi, Status);
                     //获取设备信息
-                    Status = visa32.viPrintf(Vi, "*RST\n");
+                    //Status = visa32.viPrintf(Vi, "*RST\n");
                     Status = visa32.viPrintf(Vi, "*IDN?\n");
                     CheckStatus(Vi, Status);
                     Status = visa32.viRead(Vi, out string result, 100);
@@ -338,7 +338,7 @@ namespace I2CIO_Test
         #endregion
         #region Methods
         /// <summary>
-        /// 16位二进制转换为原码
+        /// 获取short数据
         /// </summary>
         /// <param name="msb">高八位</param>
         /// <param name="lsb">低八位</param>
@@ -348,6 +348,12 @@ namespace I2CIO_Test
             short num = (short)((short)msb * 256 + (short)lsb);
             return num;
         }
+        /// <summary>
+        /// 获取ushort 数据
+        /// </summary>
+        /// <param name="msb">高八位</param>
+        /// <param name="lsb">低八位</param>
+        /// <returns></returns>
         ushort UDigitTransform(byte msb,byte lsb)
         {
             ushort num = (ushort)((ushort)msb * 256 + (ushort)lsb);

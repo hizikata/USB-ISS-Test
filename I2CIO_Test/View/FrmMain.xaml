@@ -9,7 +9,9 @@
     <TabControl>
         <TabItem Header="Setting">
             <StackPanel>
-                
+                <Button Name="btnTest" Content="Test" HorizontalAlignment="Left" Click="btnTest_Click"/>
+                <Button Name="btnTest2" Content="Test2" HorizontalAlignment="Left" Click="btnTest2_Click"/>
+                <Button Name="btnTest3" Content="Test3" HorizontalAlignment="Left" Click="btnTest3_Click"/>
             </StackPanel>
         </TabItem>
         <TabItem Header="Parameters">

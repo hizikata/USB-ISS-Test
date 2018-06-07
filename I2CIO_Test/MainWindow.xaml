@@ -80,7 +80,8 @@
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Text="温度：" Margin="0,10,5,0"/>
                             <TextBox Name="tbTemp" Grid.Row="0" Grid.Column="1" Height="25" IsHitTestVisible="False"/>
@@ -88,10 +89,16 @@
                             <TextBox Name="tbBais" Grid.Row="1" Grid.Column="1" Height="25" IsHitTestVisible="False"/>
                             <TextBlock HorizontalAlignment="Right" Grid.Row="2" Grid.Column="0" Text="Rx@10：" Margin="0,10,5,0"/>
                             <TextBox Name="tbRx10" Grid.Row="2" Grid.Column="1" Height="25" IsHitTestVisible="False"/>
+                            <Button Name="btn10" Grid.Row="2" Grid.Column="2" Height="24"
+                                    Content="设置"/>
                             <TextBlock HorizontalAlignment="Right" Grid.Row="3" Grid.Column="0" Text="Rx@20：" Margin="0,10,5,0"/>
+                            <Button Name="btn20" Grid.Row="3" Grid.Column="2" Height="24"
+                                    Content="设置"/>
                             <TextBox Name="tbRx20" Grid.Row="3" Grid.Column="1" Height="25" IsHitTestVisible="False"/>
                             <TextBlock HorizontalAlignment="Right" Grid.Row="4" Grid.Column="0" Text="Rx@30：" Margin="0,10,5,0"/>
                             <TextBox Name="tbRx30" Grid.Row="4" Grid.Column="1" Height="25" IsHitTestVisible="False"/>
+                            <Button Name="btn30" Grid.Row="4" Grid.Column="2" Height="24"
+                                    Content="设置"/>
                             <TextBlock HorizontalAlignment="Right" Grid.Row="5" Grid.Column="0" Text="Vcc：" Margin="0,10,5,0"/>
                             <TextBox Name="tbVcc" Grid.Row="5" Grid.Column="1" Height="25" IsHitTestVisible="False"/>
                             <TextBlock HorizontalAlignment="Right" Grid.Row="6" Grid.Column="0" Text="TxPower：" Margin="0,10,5,0"/>

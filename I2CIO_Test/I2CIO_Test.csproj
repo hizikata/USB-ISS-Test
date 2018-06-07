@@ -59,6 +59,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\DeviceBase.cs" />
+    <Compile Include="Model\HP8153A.cs" />
+    <Compile Include="Model\HP8156A.cs" />
+    <Compile Include="Model\IDeviceMethods.cs" />
+    <Compile Include="Model\Keithley.cs" />
     <Compile Include="View\FrmMain.xaml.cs">
       <DependentUpon>FrmMain.xaml</DependentUpon>
     </Compile>
