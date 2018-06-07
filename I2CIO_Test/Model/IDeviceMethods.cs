@@ -10,8 +10,8 @@ namespace I2CIO_Test.Model
         bool Reset();
         string Identification();
         bool Initialize();
-        bool Read();
-        bool Write();
+        string ReadCommand();
+        bool WriteCommand(string command);
        
     }
 }

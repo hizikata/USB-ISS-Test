@@ -8,7 +8,7 @@ namespace I2CIO_Test.Model
     /// <summary>
     /// GPIB设备基类
     /// </summary>
-    public class DeviceBase : IDeviceMethods
+    public class DeviceBase : IDeviceMethods,IDisposable
     {
         #region Fields
         /// <summary>
@@ -86,20 +86,37 @@ namespace I2CIO_Test.Model
             return true;
         }
         /// <summary>
-        /// 读取仪器信息
+        /// 读取指令信息
         /// </summary>
         /// <returns></returns>
-        public virtual bool Read()
+        public virtual string ReadCommand()
         {
-            return true;
+            Status = visa32.viRead(Vi, out string result, 100);
+            CheckStatus(Vi, Status);
+            return result;
+
         }
         /// <summary>
         /// 向仪器发送指令
         /// </summary>
         /// <returns></returns>
-        public virtual bool Write()
+        public virtual bool WriteCommand(string command)
         {
+            string strCmd = command + "\n";
+            Status = visa32.viPrintf(Vi, strCmd);
+            CheckStatus(Vi, Status);
             return true;
+        }
+        /// <summary>
+        /// 释放资源
+        /// </summary>
+        public void Dispose()
+        {
+            //关闭GPIB 通信
+            if (DefRM != 0)
+                visa32.viClose(DefRM);
+            if (Vi != 0)
+                visa32.viClose(Vi);
         }
         #endregion
     }

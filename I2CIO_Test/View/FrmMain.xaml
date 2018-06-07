@@ -3,25 +3,110 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:I2CIO_Test.View"
-        mc:Ignorable="d"
+        xmlns:local="clr-namespace:I2CIO_Test.View" Background="LightGray"
+        mc:Ignorable="d" Loaded="Window_Loaded" Closed="Window_Closed"
         Title="低温测试" Height="450" Width="800">
     <TabControl>
-        <TabItem Header="Setting">
+        <TabItem Header="Settings">
             <StackPanel>
-                <Button Name="btnTest" Content="Test" HorizontalAlignment="Left" Click="btnTest_Click"/>
-                <Button Name="btnTest2" Content="Test2" HorizontalAlignment="Left" Click="btnTest2_Click"/>
-                <Button Name="btnTest3" Content="Test3" HorizontalAlignment="Left" Click="btnTest3_Click"/>
+
             </StackPanel>
         </TabItem>
         <TabItem Header="Parameters">
             <StackPanel>
-                
+
             </StackPanel>
         </TabItem>
-        <TabItem Header="Test">
-            <StackPanel>
-                
+        <TabItem Header="Test" IsSelected="True">
+            <StackPanel Margin="5">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="COM选择:"/>
+                    <ComboBox x:Name="cmbCom" Width="120"/>
+                    <Button x:Name="btnCom" Content="初始化" Click="btnCom_Click"/>
+                    <TextBox x:Name="tbDisplay" Width="300"/>
+                </StackPanel>
+                <GroupBox Header="Hp8153A光功率计" Margin="5">
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="波长:"/>
+                        <ComboBox x:Name="cmbMeterWaveLength" Width="100"/>
+                        <TextBlock Text="Cal:" Margin="10,0"/>
+                        <TextBox x:Name="tbMeterCal"/>
+                        <Button Name="btnMeterSet" Content="设置" Click="btnMeterSet_Click"/>
+                    </StackPanel>
+
+                </GroupBox>
+                <GroupBox Header="Hp8156A光衰减器" Margin="5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="波长:"/>
+                        <ComboBox x:Name="cmbAttWaveLength" Width="100"/>
+                        <TextBlock Text="Cal:" Margin="10,0"/>
+                        <TextBox x:Name="tbAttCal"/>
+                        <TextBlock Text="衰减:"/>
+                        <TextBox Name="tbAttAtt"/>
+                        <Button Name="btnAttSet" Content="设置" Click="btnAttSet_Click"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="参数展示" Margin="5">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="SN:"/>
+                            <TextBox x:Name="tbSN" IsHitTestVisible="False" Width="200"/>
+                        </StackPanel>
+                        <Grid Width="Auto">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <TextBlock Text="TxPower:"/>
+                                <TextBlock x:Name="tbTxPower"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <TextBlock Text="RX1:"/>
+                                <TextBlock Name="tbRx1"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                <TextBlock Text="Sen:"/>
+                                <TextBlock Name="tbSen"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                                <TextBlock Text="ER:"/>
+                                <TextBlock Name="tbER"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                <TextBlock Text="RX2:"/>
+                                <TextBlock Name="tbRx2"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
+                                <TextBlock Text="Temp:"/>
+                                <TextBlock Name="tbTemp"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                                <TextBlock Text="Crossing:"/>
+                                <TextBlock Name="tbCrossing"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                                <TextBlock Text="RX3"/>
+                                <TextBlock Name="tbRx3"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal">
+                                <TextBlock Text="Bais:"/>
+                                <TextBlock Name="tbBais"/>
+                            </StackPanel>
+                            <Button Name="btnGetValue" Grid.Row="3" Grid.Column="1" Content="获取参数值" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    Click="btnGetValue_Click"/>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+
             </StackPanel>
         </TabItem>
     </TabControl>

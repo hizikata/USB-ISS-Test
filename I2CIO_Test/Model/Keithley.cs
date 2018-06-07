@@ -18,5 +18,7 @@ namespace I2CIO_Test.Model
         {
             DeviceName = "Keithley";
         }
+
+        
     }
 }

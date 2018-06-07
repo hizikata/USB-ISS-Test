@@ -64,6 +64,8 @@
     <Compile Include="Model\HP8156A.cs" />
     <Compile Include="Model\IDeviceMethods.cs" />
     <Compile Include="Model\Keithley.cs" />
+    <Compile Include="Model\LowTempPara.cs" />
+    <Compile Include="Model\MP2100A.cs" />
     <Compile Include="View\FrmMain.xaml.cs">
       <DependentUpon>FrmMain.xaml</DependentUpon>
     </Compile>

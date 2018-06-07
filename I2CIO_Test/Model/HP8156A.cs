@@ -19,8 +19,49 @@ namespace I2CIO_Test.Model
         {
             DeviceName = "HP8156A";
         }
-
-
+        /// <summary>
+        /// 设置波长
+        /// </summary>
+        /// <param name="waveLength">波长(形如:1310，单位nm)</param>
+        public void SetWaveLength(string waveLength)
+        {
+            Status = visa32.viPrintf(Vi, ":INP:WAV " + waveLength + "NM\n");
+            CheckStatus(Vi, Status);
+        }
+        /// <summary>
+        /// 设置cal
+        /// </summary>
+        /// <param name="cal">cal</param>
+        public void SetCal(string cal)
+        {
+            Status = visa32.viPrintf(Vi, ":INP:OFFS " + cal + "dB\n");
+            CheckStatus(Vi, Status);
+        }
+        /// <summary>
+        /// 设置衰减
+        /// </summary>
+        /// <param name="att">衰减</param>
+        public void SetAtt(string att)
+        {
+            Status = visa32.viPrintf(Vi, ":INP:ATT " + att + "dB\n");
+            CheckStatus(Vi, Status);
+        }
+        /// <summary>
+        /// 打开设备
+        /// </summary>
+        public void Open()
+        {
+            Status = visa32.viPrintf(Vi, "OUTP ON\n");
+            CheckStatus(Vi, Status);
+        }
+        /// <summary>
+        /// 关闭设备
+        /// </summary>
+        public void Close()
+        {
+            Status = visa32.viPrintf(Vi, "OUTP OFF\n");
+            CheckStatus(Vi, Status);
+        }
         /******
          * :INP:WAV 1490NM  //设置波长
          * :INP:OFFS 4.123dB //设置cal
