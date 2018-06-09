@@ -46,7 +46,7 @@ namespace I2CIO_Test.Model
         /// <param name="status"></param>
         protected void CheckStatus(int vi, int status)
         {
-            if (status < visa32.VI_SUCCESS)
+            if (status != visa32.VI_SUCCESS)
             {
                 StringBuilder err = new StringBuilder(256);
                 visa32.viStatusDesc(vi, status, err);
@@ -69,7 +69,7 @@ namespace I2CIO_Test.Model
         /// 获取设备信息
         /// </summary>
         /// <returns></returns>
-        public string Identification()
+        public string GetIdn()
         {
             Status = visa32.viPrintf(Vi, "*IDN?\n");
             CheckStatus(Vi, Status);
@@ -108,7 +108,7 @@ namespace I2CIO_Test.Model
             return true;
         }
         /// <summary>
-        /// 释放资源
+        /// 释放VISA资源
         /// </summary>
         public void Dispose()
         {

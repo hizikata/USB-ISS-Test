@@ -39,6 +39,12 @@ namespace I2CIO_Test.Model
             CheckStatus(Vi, Status);
             return ReadCommand();
         }
+        public string GetErrorRate()
+        {
+            Status = visa32.viPrintf(Vi, "ER?\n");
+            CheckStatus(Vi, Status);
+            return ReadCommand();
+        }
 
     }
 }

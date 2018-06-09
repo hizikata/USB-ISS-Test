@@ -8,7 +8,7 @@ namespace I2CIO_Test.Model
     interface IDeviceMethods
     {
         bool Reset();
-        string Identification();
+        string GetIdn();
         bool Initialize();
         string ReadCommand();
         bool WriteCommand(string command);

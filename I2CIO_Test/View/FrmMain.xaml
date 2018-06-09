@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:I2CIO_Test.View" Background="LightGray"
         mc:Ignorable="d" Loaded="Window_Loaded" Closed="Window_Closed"
-        Title="低温测试" Height="450" Width="800">
+        Title="低温测试" Height="450" Width="719">
     <TabControl>
         <TabItem Header="Settings">
             <StackPanel>
@@ -28,23 +28,34 @@
                 <GroupBox Header="Hp8153A光功率计" Margin="5">
 
                     <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="地址:"/>
+                        <ComboBox x:Name="cmbMeterAdd" Width="60"/>
+                        <Button Name="btnMeterSet" Content="初始化" Click="btnMeterSet_Click"/>
                         <TextBlock Text="波长:"/>
-                        <ComboBox x:Name="cmbMeterWaveLength" Width="100"/>
+                        <ComboBox x:Name="cmbMeterWaveLength" Width="100" SelectionChanged="cmbMeterWaveLength_SelectionChanged"/>
                         <TextBlock Text="Cal:" Margin="10,0"/>
-                        <TextBox x:Name="tbMeterCal"/>
-                        <Button Name="btnMeterSet" Content="设置" Click="btnMeterSet_Click"/>
+                        <TextBox x:Name="tbMeterCal" KeyUp="tbMeterCal_KeyUp"/>
                     </StackPanel>
-
                 </GroupBox>
                 <GroupBox Header="Hp8156A光衰减器" Margin="5">
                     <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="地址:"/>
+                        <ComboBox x:Name="cmbAttAdd" Width="60"/>
+                        <Button Name="btnAttSet" Content="初始化" Click="btnAttSet_Click"/>
                         <TextBlock Text="波长:"/>
-                        <ComboBox x:Name="cmbAttWaveLength" Width="100"/>
+                        <ComboBox x:Name="cmbAttWaveLength" Width="100" SelectionChanged="cmbAttWaveLength_SelectionChanged"/>
                         <TextBlock Text="Cal:" Margin="10,0"/>
-                        <TextBox x:Name="tbAttCal"/>
+                        <TextBox x:Name="tbAttCal" KeyUp="tbAttCal_KeyUp"/>
                         <TextBlock Text="衰减:"/>
                         <TextBox Name="tbAttAtt"/>
-                        <Button Name="btnAttSet" Content="设置" Click="btnAttSet_Click"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="MP2100A眼图仪" Margin="5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="地址:"/>
+                        <ComboBox x:Name="cmbBertAdd" Width="60"/>
+                        <Button Name="btnBertSet" Content="初始化" Click="btnBertSet_Click"/>
+                        <TextBox Name="tbBertInfo" Width="400"/>
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="参数展示" Margin="5">
