@@ -32,8 +32,6 @@ namespace I2CIO_Test.Model
             Status = visa32.viOpenDefaultRM(out DefRM);
             Status = visa32.viOpen(DefRM, DeviceConn, visa32.VI_NO_LOCK, visa32.VI_TMO_IMMEDIATE, out Vi);
             CheckStatus(Vi, Status);
-
-
         }
 
 

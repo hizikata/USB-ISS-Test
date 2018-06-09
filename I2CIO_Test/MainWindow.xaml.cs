@@ -328,7 +328,7 @@ namespace I2CIO_Test
         #region VISAMethods
         private void CheckStatus(int vi, int status)
         {
-            if (status < visa32.VI_SUCCESS)
+            if (status != visa32.VI_SUCCESS)
             {
                 StringBuilder err = new StringBuilder(256);
                 visa32.viStatusDesc(vi, status, err);

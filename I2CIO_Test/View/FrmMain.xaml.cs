@@ -135,7 +135,7 @@ namespace I2CIO_Test.View
                     if (Hp8156A != null)
                         Hp8156A.Dispose();
                     Hp8156A = new HP8156A(cmbAttAdd.SelectedItem.ToString().Trim());
-                    MessageBox.Show(Hp8156A.GetIdn(),"系统提示");
+                    MessageBox.Show(Hp8156A.GetIdn(), "系统提示");
                 }
                 else
                 {
@@ -235,7 +235,7 @@ namespace I2CIO_Test.View
                     tbRx1.Text = ParaModel.RxPower;
                     //读取HP8153光功率计功率
                     tbTxPower.Text = Hp8153A.ReadData();
-                    
+
                     Thread.Sleep(200);
                     //RX@19
                     Hp8156A.SetAtt("19");
@@ -357,7 +357,7 @@ namespace I2CIO_Test.View
                 MessageBox.Show("请先初始化光功率计", "系统设置");
                 return;
             }
-            if(cmbMeterWaveLength.SelectedIndex!=-1)
+            if (cmbMeterWaveLength.SelectedIndex != -1)
             {
                 Hp8153A.SetWaveLength(cmbMeterWaveLength.SelectedItem.ToString());
             }
@@ -391,7 +391,49 @@ namespace I2CIO_Test.View
 
         private void tbAttCal_KeyUp(object sender, KeyEventArgs e)
         {
+            if (Hp8156A == null)
+            {
+                MessageBox.Show("请先初始化衰减器", "系统设置");
+                return;
+            }
+            if (e.Key == Key.Enter && tbAttCal.Text.Trim() != string.Empty)
+            {
+                Hp8156A.SetCal(tbAttCal.Text.Trim());
+            }
+        }
+        //眼图仪发送指令
+        private void btnSendCommand_Click(object sender, RoutedEventArgs e)
+        {
+            if (Mp2100A == null)
+            {
+                MessageBox.Show("请先初始化眼图仪", "系统提示");
+                return;
+            }
+            Mp2100A.WriteCommand(tbBertCommand.Text.Trim());
 
+        }
+        //眼图仪读取数据
+        private void btnReadCommand_Click(object sender, RoutedEventArgs e)
+        {
+            if (Mp2100A == null)
+            {
+                MessageBox.Show("请先初始化眼图仪", "系统提示");
+                return;
+            }
+            tbReadArea.Text = Mp2100A.ReadCommand();
+        }
+
+        private void tbAttAtt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (Hp8156A == null)
+            {
+                MessageBox.Show("请先初始化衰减器", "系统设置");
+                return;
+            }
+            if (e.Key == Key.Enter && tbAttCal.Text.Trim() != string.Empty)
+            {
+                Hp8156A.SetCal(tbAttAtt.Text.Trim());
+            }
         }
     }
 }
